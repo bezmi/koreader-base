@@ -93,6 +93,9 @@ function framebuffer:setRotationMode(mode)
         elseif mode == 2 then key = "REVERSE_PORTRAIT"
         elseif mode == 3 then key = "REVERSE_LANDSCAPE" end
         if key then
+	    -- g sensor will be locked after this, so toggle the setting to reflect this
+	    G_reader_settings:makeTrue("input_ignore_gsensor")
+
             android.orientation.set(C["ASCREEN_ORIENTATION_" .. key])
         end
     else
